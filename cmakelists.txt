@@ -9,3 +9,6 @@ set(INPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/inputs")
 
 add_executable(day1 src/01.cpp)
 target_compile_definitions(day1 PRIVATE INPUT_PATH="${INPUT_DIR}/01.txt")
+
+add_executable(day2 src/02.cpp)
+target_compile_definitions(day2 PRIVATE INPUT_PATH="${INPUT_DIR}/02.txt")
