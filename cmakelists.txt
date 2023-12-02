@@ -1,0 +1,11 @@
+cmake_minimum_required (VERSION 3.8)
+
+project(Advent-of-Code-2023)
+set(CMAKE_CXX_STANDARD 20)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/cpp_utils/include)
+
+set(INPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/inputs")
+
+add_executable(day1 src/01.cpp)
+target_compile_definitions(day1 PRIVATE INPUT_PATH="${INPUT_DIR}/01.txt")
