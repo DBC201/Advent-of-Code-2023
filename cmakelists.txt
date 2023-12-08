@@ -27,3 +27,5 @@ add_executable(day6 src/06.cpp)
 add_executable(day7 src/07.cpp)
 target_compile_definitions(day7 PRIVATE INPUT_PATH="${INPUT_DIR}/07.txt")
 
+add_executable(day8 src/08.cpp)
+target_compile_definitions(day8 PRIVATE INPUT_PATH="${INPUT_DIR}/08.txt")
