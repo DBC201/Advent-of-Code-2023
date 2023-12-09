@@ -41,8 +41,8 @@ int main() {
 		time += pow(10, time_curr_power) * times[i];
 		distance += pow(10, distance_curr_power) * distances[i];
 
-		time_curr_power += ceil(log(times[i])/log(10));
-		distance_curr_power += ceil(log(distances[i])/log(10));
+		time_curr_power += floor(log(times[i])/log(10)) + 1;
+		distance_curr_power += floor(log(distances[i])/log(10)) + 1;
 	}
 
 	for (uint64_t wait_duration=1; wait_duration<time; wait_duration++) {
