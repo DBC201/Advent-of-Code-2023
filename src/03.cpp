@@ -1,6 +1,5 @@
 #include <file_utils.h>
 #include <string_utils.h>
-#include <coordinate_utils.h>
 #include <unordered_set>
 
 int main() {
@@ -82,7 +81,7 @@ int main() {
 					continue;
 				}
 
-				std::string coord = cpp_utils::coordinate_utils::coordinate_vector_to_string<int>({new_y, new_x});
+				std::string coord = cpp_utils::string_utils::vector_to_string<int>({new_y, new_x});
 
 				if (considered.contains(coord)) {
 					continue;
@@ -103,7 +102,7 @@ int main() {
 						}
 						if (!tail_done) {
 							if (std::isdigit(lines[new_y][tail])) {
-								considered.insert(cpp_utils::coordinate_utils::coordinate_vector_to_string<int>({new_y, tail}));
+								considered.insert(cpp_utils::string_utils::vector_to_string<int>({new_y, tail}));
 								tail--;
 							}
 							else {
@@ -113,7 +112,7 @@ int main() {
 
 						if (!head_done) {
 							if (std::isdigit(lines[new_y][head])) {
-								considered.insert(cpp_utils::coordinate_utils::coordinate_vector_to_string<int>({new_y, head}));
+								considered.insert(cpp_utils::string_utils::vector_to_string<int>({new_y, head}));
 								head++;
 							}
 							else {
