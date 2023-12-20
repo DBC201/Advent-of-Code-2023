@@ -2,19 +2,8 @@
 #include <string_utils.h>
 #include <numeric>
 #include <unordered_set>
-#include <threading_utils.h>
-#include <timer_utils.h>
 
-using cpp_utils::threading_utils::ThreadPool;
-using cpp_utils::timer_utils::Timer;
-
-void brute_search (std::string arrangement, std::vector<int> pattern, std::vector<std::string>& result, std::unordered_set<std::string>& cache) {
-	if (cache.contains(arrangement)) {
-		return;
-	}
-	else {
-		cache.insert(arrangement);
-	}
+void brute_search (std::string arrangement, std::vector<int> pattern, int &count, int index) {
 	int pattern_sum = std::accumulate(pattern.begin(), pattern.end(), 0);
 	int head = 0, tail = 0;
 	int pattern_index = 0;
@@ -59,20 +48,18 @@ void brute_search (std::string arrangement, std::vector<int> pattern, std::vecto
 	}
 
 	if (total_ampersand == pattern_sum && match) {
-		result.push_back(arrangement);
+		count++;
 		return;
 	}
-	else if (total_ampersand > pattern_sum) {
+	else if (total_ampersand > pattern_sum || index >= arrangement.length()) {
 		return;
 	}
 
-	int count = 0;
-
-	for (int i=0; i<arrangement.length(); i++) {
+	for (int i=index; i<arrangement.length(); i++) {
 		if (arrangement[i] == '?') {
 			std::string n = arrangement;
 			n[i] = '#';
-			brute_search(n, pattern, result, cache);
+			brute_search(n, pattern, count, i+1);
 		}
 	}
 }
@@ -88,54 +75,28 @@ int main() {
 		patterns.push_back(cpp_utils::string_utils::convert_string_vector<int>(string_pattern));
 	});
 
-	Timer timer;
-	timer.start();
 	int sum = 0;
-	ThreadPool threadPool;
-	int done_count = 0;
 	for (int i=0; i<lines.size(); i++) {
-		std::unordered_set<std::string> cache;
-		std::vector<std::string> results;
-		brute_search(lines[i], patterns[i], results, cache);
-		std::cout << ++done_count << "/" << lines.size() << std::endl;
-		sum += results.size();
-		// threadPool.enqueue([&lines, &patterns, i, &threadPool, &done_count, &sum]() {
-		// 	std::unordered_set<std::string> cache;
-		// 	std::vector<std::string> results;
-		// 	brute_search(lines[i], patterns[i], results, cache);
-		// 	threadPool.m.lock();
-		// 	std::cout << ++done_count << "/" << lines.size() << std::endl;
-		// 	sum += results.size();
-		// 	threadPool.m.unlock();
-		// });
+		brute_search(lines[i], patterns[i], sum, 0);
+		std::cout << i+1 << "/" << lines.size() << std::endl;
 	}
 
-	threadPool.wait();
-
 	std::cout << sum << std::endl;
-	timer.stop();
-
-	std::cout << timer.get_miliseconds() << " ms" << std::endl;
 
 	for (int i=0; i<lines.size(); i++) {
 		std::vector<int> pattern = patterns[i];
 		std::string line = lines[i];
 		for (int j=0; j<4; j++) {
+			lines[i] += "?";
 			lines[i] += line;
-			if (j != 3) {
-				lines[i] += "?";
-			}
 			patterns[i].insert(patterns[i].end(), pattern.begin(), pattern.end()); 
 		}
 	}
 
 	sum = 0;
 	for (int i=0; i<lines.size(); i++) {
-		std::unordered_set<std::string> cache;
-		std::vector<std::string> results;
-		brute_search(lines[i], patterns[i], results, cache);
-		std::cout << i+1 << "/" << lines.size() << ": " << results.size() << std::endl;
-		sum += results.size();
+		brute_search(lines[i], patterns[i], sum, 0);
+		std::cout << i+1 << "/" << lines.size() << std::endl;
 	}
 
 	std::cout << sum << std::endl;
