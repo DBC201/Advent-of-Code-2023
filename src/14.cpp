@@ -107,6 +107,8 @@ int main() {
 		grid.push_back(line);
 	});
 
+	fileUtils.close();
+
 	int sum = 0;
 	
 

@@ -92,6 +92,7 @@ int main()
 			= cpp_utils::string_utils::convert_string_vector<std::string>(
 					cpp_utils::string_utils::split_by_string(line, ","));
 		input.insert(input.end(), curr_line.begin(), curr_line.end()); });
+	fileUtils.close();
 
 	int sum = 0;
 	for (std::string s : input)

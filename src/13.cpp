@@ -107,6 +107,7 @@ int main() {
 			grids.back().push_back(line);
 		}
 	});
+	fileUtils.close();
 	int sum = 0;
 	for (int i=0; i<grids.size(); i++) {
 		int c = sum;

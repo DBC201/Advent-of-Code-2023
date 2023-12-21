@@ -7,6 +7,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/cpp_utils/include)
 
 set(INPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/inputs")
 
+# Set the optimization level to -O3 for all targets
+add_compile_options("$<$<CXX_COMPILER_ID:GNU>:-O3>")
+add_compile_options("$<$<CXX_COMPILER_ID:Clang>:-O3>")
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/O2>")  # Use /O2 for Visual Studio
+
 add_executable(day1 src/01.cpp)
 target_compile_definitions(day1 PRIVATE INPUT_PATH="${INPUT_DIR}/01.txt")
 
@@ -50,3 +55,6 @@ target_compile_definitions(day14 PRIVATE INPUT_PATH="${INPUT_DIR}/14.txt")
 
 add_executable(day15 src/15.cpp)
 target_compile_definitions(day15 PRIVATE INPUT_PATH="${INPUT_DIR}/15.txt")
+
+add_executable(day16 src/16.cpp)
+target_compile_definitions(day16 PRIVATE INPUT_PATH="${INPUT_DIR}/16.txt")
