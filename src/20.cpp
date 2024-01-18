@@ -225,7 +225,7 @@ int main() {
 	// std::cout << press_count << std::endl;
 
 	// saw this solution on reddit, I don't understand why it works
-	// Is it given that no two module won't be high, or they will converge in gcm?
+	// Is it given that no two module won't be high at the same time, or they will converge in gcm?
 	// wasn't able to find any proof, not comfortable with this solution
 
 	Module *parent = modules.at("rx")->get_parents()[0];
