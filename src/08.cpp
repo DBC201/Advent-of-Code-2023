@@ -119,12 +119,12 @@ int main() {
 		step_count++;
 	}
 	
-	uint64_t gcm = (step_counts[0] * step_counts[1])/Euclid_GCD(step_counts[0], step_counts[1]);
+	uint64_t lcm = (step_counts[0] * step_counts[1])/Euclid_GCD(step_counts[0], step_counts[1]);
 
 	for (int i=2; i<step_counts.size(); i++) {
-		gcm = (gcm * step_counts[i])/Euclid_GCD(gcm, step_counts[i]);
+		lcm = (lcm * step_counts[i])/Euclid_GCD(lcm, step_counts[i]);
 	}
 
-	std::cout << gcm << std::endl;
+	std::cout << lcm << std::endl;
 	return 0;
 }
