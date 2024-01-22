@@ -70,3 +70,6 @@ target_compile_definitions(day19 PRIVATE INPUT_PATH="${INPUT_DIR}/19.txt")
 
 add_executable(day20 src/20.cpp)
 target_compile_definitions(day20 PRIVATE INPUT_PATH="${INPUT_DIR}/20.txt")
+
+add_executable(day21 src/21.cpp)
+target_compile_definitions(day21 PRIVATE INPUT_PATH="${INPUT_DIR}/21.txt")
